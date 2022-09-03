@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  webapp:
+    build: ./frontend
+    container_name: front_web_app
+    ports:
+      - "3000:3000"
+  api: 
+    build: ./backend
+    container_name: backend_api
+    ports:
+      - 3800:3800
+    environment:
+      DB_URL: mongodb://db/task
+  db:
+    image: mongo:4.0-xenial
+    ports:
+      - 27017:27017
+    volumes:
+      - appname:/data/db
+
+volumes:
+  appname:
